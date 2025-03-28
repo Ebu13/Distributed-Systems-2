@@ -1,0 +1,38 @@
+version: '3'
+services:
+  master:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: master
+    networks:
+      - cluster
+    command: /bin/bash -c "/app/scripts/run_mpi.sh"
+
+  worker1:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: worker1
+    networks:
+      - cluster
+
+  worker2:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: worker2
+    networks:
+      - cluster
+
+  worker3:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: worker3
+    networks:
+      - cluster
+
+networks:
+  cluster:
+    driver: bridge
